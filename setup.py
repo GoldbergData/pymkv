@@ -5,10 +5,14 @@
 
 from os.path import abspath, dirname, join
 from setuptools import setup
-from pip.req import parse_requirements
+# from pip.req import parse_requirements
 
 from pymkv import __version__
 
+def parse_requirements(filename):
+    """ load requirements from a pip requirements file """
+    lineiter = (line.strip() for line in open(filename))
+    return [line for line in lineiter if line and not line.startswith("#")]
 
 this_dir = abspath(dirname(__file__))
 with open(join(this_dir, 'README.rst'), encoding='utf-8') as file:
